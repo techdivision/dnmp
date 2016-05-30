@@ -80,3 +80,9 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Build and deploy dirs
+www
+target
+html
+build
