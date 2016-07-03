@@ -9,9 +9,9 @@ RUN apk add --update \
         supervisor \
         mysql mysql-client \
         nginx \
-        redis\
-        php-fpm php-curl php-dom php-gd php-iconv php-mcrypt php-pdo php-pdo_mysql php-soap php-ctype php-json php-phar php-openssl php-zlib && \
-        # php7-fpm && \
+        redis \
+        php5-fpm php5-curl php5-dom php5-gd php5-iconv php5-mcrypt php5-pdo php5-pdo_mysql php5-soap php5-ctype php5-json php5-phar php5-openssl php5-zlib && \
+        # php7-fpm ... && \
 
     # this is not executed by mariadb package
     mysql_install_db --user=mysql && \
