@@ -9,7 +9,7 @@ RUN apk add --update \
         supervisor \
         mysql mysql-client \
         nginx \
-        redis\
+        redis \
         php-fpm php-curl php-dom php-gd php-iconv php-mcrypt php-pdo php-pdo_mysql php-soap php-ctype php-json php-phar php-openssl php-zlib && \
         # php7-fpm && \
 
