@@ -22,8 +22,8 @@ RUN apk add --update \
     # install composer
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
 
-    # install gulp 0.4
-    npm install -g "gulpjs/gulp-cli#4.0"
+    # install latest gulp-cli tools globally
+    npm install gulpjs/gulp-cli -g
 
 # copy all configurations
 COPY etc /etc
