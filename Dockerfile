@@ -20,7 +20,7 @@ RUN echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositor
     rm -rf /var/cache/apk/* && \
 
     # install composer
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    curl -sS https://getcomposer.org/installer | php7 -- --install-dir=/usr/local/bin --filename=composer && \
 
     # install latest gulp-cli tools globally
     npm install gulpjs/gulp-cli -g && \
