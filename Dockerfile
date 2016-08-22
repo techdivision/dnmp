@@ -3,6 +3,7 @@ MAINTAINER Johann Zelger <j.zelger@techdivision.com>
 
 RUN echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     apk add --update \
+        bash wget ca-certificates openssl \
         apache-ant \
         curl git nodejs \
         supervisor \
@@ -15,6 +16,10 @@ RUN echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositor
 
     # this is not executed by mariadb package
     mysql_install_db --user=mysql && \
+
+    # install gitlab ci runner
+    wget -O /usr/bin/gitlab-ci-multi-runner https://gitlab-ci-multi-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-ci-multi-runner-linux-amd64 && \
+    chmod +x /usr/bin/gitlab-ci-multi-runner && \
 
     # clear apk cache to optimize image filesize
     rm -rf /var/cache/apk/* && \
