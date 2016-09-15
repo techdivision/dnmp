@@ -3,7 +3,7 @@ MAINTAINER Johann Zelger <j.zelger@techdivision.com>
 
 RUN echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     apk add --update \
-        bash wget ca-certificates openssl \
+        bash wget ca-certificates openssl rsync \
         apache-ant \
         curl git nodejs \
         supervisor \
