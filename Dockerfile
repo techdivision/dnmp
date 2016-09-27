@@ -32,7 +32,9 @@ RUN echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositor
 
     # prepare filesystem and permissions
     mkdir /run/mysqld /run/apache2 && \
-    chown mysql /run/mysqld
+    chown mysql /run/mysqld && \
+	mv /usr/bin/php /usr/bin/php5 && \
+	ln -s /usr/bin/php7 /usr/bin/php
 
 # copy all configurations
 COPY etc /etc
