@@ -1,2 +1,2 @@
 # dnmp
-nginx, mysql, php5, php7, redis all in one docker container
+nginx, mysql, php7, redis all in one docker container
