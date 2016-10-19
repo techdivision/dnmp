@@ -26,11 +26,19 @@ RUN echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositor
     npm install gulpjs/gulp-cli -g && \
 
     # prepare filesystem and permissions
-    mkdir /run/mysqld /run/apache2 && \
-    chown mysql /run/mysqld
+    mkdir -p /run/mysqld/ && \
+    chown mysql /run/mysqld/
 
 # copy all configurations
 COPY etc /etc
 
+# copy helpers
+COPY helpers /helpers
+
+# make helpers executeable
+RUN chmod +x /helpers/*.sh
+
+# Create root user without password
+RUN /helpers/init_mysql.sh
 
 CMD ["/usr/bin/supervisord", "--nodaemon"]
