@@ -1,6 +1,12 @@
 FROM alpine:edge
 MAINTAINER Johann Zelger <j.zelger@techdivision.com>
 
+# copy all configurations
+COPY etc /etc
+
+# copy helpers
+COPY helpers /helpers
+
 RUN echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     apk add --no-cache \
         bash wget ca-certificates openssl rsync \
@@ -27,18 +33,12 @@ RUN echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositor
 
     # prepare filesystem and permissions
     mkdir -p /run/mysqld/ && \
-    chown mysql /run/mysqld/
+    chown mysql /run/mysqld/ && \
 
-# copy all configurations
-COPY etc /etc
+    # make helpers executeable
+    chmod +x /helpers/*.sh && \
 
-# copy helpers
-COPY helpers /helpers
-
-# make helpers executeable
-RUN chmod +x /helpers/*.sh
-
-# Create root user without password
-RUN /helpers/init_mysql.sh
+    # Create root user without password
+    /helpers/init_mysql.sh
 
 CMD ["/usr/bin/supervisord", "--nodaemon"]
