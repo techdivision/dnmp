@@ -34,6 +34,7 @@ RUN echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositor
     # prepare filesystem and permissions
     mkdir -p /run/mysqld/ && \
     chown mysql /run/mysqld/ && \
+    ln -s /usr/bin/php7 /usr/bin/php && \
 
     # make helpers executeable
     chmod +x /helpers/*.sh && \
