@@ -19,6 +19,9 @@ RUN echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositor
         php7-json php7-openssl php7-zlib php7-intl php7-xsl php7-zip php7-bcmath php7-mbstring php7-phar php7-session \
         php7-mongodb php7-xdebug php7 && \
 
+    # disable xdebug
+    rm /etc/php7/conf.d/xdebug.ini && \
+
     # this is not executed by mariadb package
     mysql_install_db --user=mysql && \
 
