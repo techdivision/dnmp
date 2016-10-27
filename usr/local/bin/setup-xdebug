@@ -4,7 +4,7 @@
 # Simple helper script to enable or disable xdebug and also set some additional parameters.
 ##
 
-set -e
+set -x
 
 # init variables
 ENABLE_XDEBUG="${XDEBUG_ENABLE}"
@@ -21,7 +21,7 @@ PHP_XDEBUG_CONFIG_FILE="/etc/php7/conf.d/xdebug.ini"
 for i in "$@"
 do
 case $i in
-    -n|--no-prompt)
+    --no-prompt)
         NO_PROMPT="true"
         shift
     ;;
@@ -55,13 +55,13 @@ case $i in
     ;;
     --help)
         echo "Possible parameters are: "
-        echo "-e --enable      Enable xdebug"
-        echo "-d --disable     Disable xdebug"
-        echo "-r --restart-fpm Restarts php-fpm service "
-        echo "-a --autostart   Autoconnect to host"
-        echo "-h --host        Connect to host"
-        echo "-p --port        Connect to port"
-        echo "-n --no-prompt   Avoid any prompt"
+        echo "-e    --enable      Enable xdebug"
+        echo "-d   --disable     Disable xdebug"
+        echo "-r   --restart-fpm Restarts php-fpm service "
+        echo "-a   --autostart   Autoconnect to host"
+        echo "-h   --host        Connect to host"
+        echo "-p   --port        Connect to port"
+        echo "     --no-prompt   Avoid any prompt"
         exit
     ;;
     *)
@@ -74,7 +74,7 @@ done
 
 
 # ensure that xdebug must be enabled or not
-if [ -z "${ENABLE_XDEBUG}" && NO_PROMPT == "false" ]; then
+if [[ -z "${ENABLE_XDEBUG}" && NO_PROMPT == "false" ]]; then
     while true; do
     read -p "Do you wish to enable xdebug? [Y|n]" yn
     case $yn in
@@ -86,7 +86,7 @@ done
 fi
 
 # ensure that fpm must be restarted or not
-if [ -z "${RESTART_FPM}" && NO_PROMPT == "false" ]; then
+if [[ -z "${RESTART_FPM}" && NO_PROMPT == "false" ]]; then
     while true; do
     read -p "Do you wish to restart fpm? [Y|n]" yn
     case $yn in

@@ -47,4 +47,6 @@ RUN echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositor
     # Create root user without password
     /helpers/init_mysql.sh
 
+ENTRYPOINT ["docker-entrypoint.sh"]
+
 CMD ["/usr/bin/supervisord", "--nodaemon"]
