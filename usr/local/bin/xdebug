@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ##
-# Simple helper script to enable or disable xdebug and also set same additional parameters.
+# Simple helper script to enable or disable xdebug and also set some additional parameters.
 ##
 
 set -e
