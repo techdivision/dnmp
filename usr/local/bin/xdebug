@@ -1,0 +1,127 @@
+#!/usr/bin/env bash
+
+##
+# Simple helper script to enable or disable xdebug and also set same additional parameters.
+##
+
+set -e
+
+# init variables
+ENABLE_XDEBUG=
+REMOTE_AUTOSTART=
+REMOTE_HOST=
+REMOTE_PORT=
+RESTART_FPM=
+
+# location for xdebug config
+PHP_XDEBUG_CONFIG_FILE="/etc/php7/conf.d/xdebug.ini"
+
+# loop for any possible parameters
+for i in "$@"
+do
+case $i in
+    -e|--enable)
+        ENABLE_XDEBUG="1"
+        shift
+    ;;
+    -d|--disable)
+        ENABLE_XDEBUG="0"
+        shift
+    ;;
+    -r|--restart-fpm)
+        RESTART_FPM="1"
+        shift
+    ;;
+    -a|--autostart)
+        REMOTE_AUTOSTART="1"
+        shift
+    ;;
+    -n|--no-autostart)
+        REMOTE_AUTOSTART="0"
+        shift
+    ;;
+    -h=*|--host=*)
+        REMOTE_HOST="${i#*=}"
+        shift
+    ;;
+    -p=*|--port=*)
+        REMOTE_PORT="${i#*=}"
+        shift
+    ;;
+    --help)
+        echo "Possible parameters are: "
+        echo "-e --enable      Enable xdebug"
+        echo "-d --disable     Disable xdebug"
+        echo "-r --restart-fpm Restarts php-fpm service "
+        echo "-a --autostart   Autoconnect to host"
+        echo "-h --host        Connect to host"
+        echo "-p --port        Connect to port"
+        exit
+    ;;
+    *)
+        echo "Unknown parameter \"${i}\". For more information run:"
+        echo "${0} --help"
+        exit;
+    ;;
+esac
+done
+
+
+# ensure that xdebug must be enabled or not
+if [ -z "${ENABLE_XDEBUG}" ]; then
+    while true; do
+    read -p "Do you wish to enable xdebug? [Y|n]" yn
+    case $yn in
+        [Yy]* ) ENABLE_XDEBUG="1"; break;;
+        [Nn]* ) ENABLE_XDEBUG="0"; break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+fi
+
+# ensure that fpm must be restarted or not
+if [ -z "${RESTART_FPM}" ]; then
+    while true; do
+    read -p "Do you wish to restart fpm? [Y|n]" yn
+    case $yn in
+        [Yy]* ) RESTART_FPM="1"; break;;
+        [Nn]* ) RESTART_FPM="0"; break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+fi
+
+# enable xdebug
+if [ "${ENABLE_XDEBUG}" == "1" ]; then
+    echo "xdebug is enabled"
+
+    # override file if exists
+    echo "zend_extension=xdebug.so" > ${PHP_XDEBUG_CONFIG_FILE}
+
+    if [ "${REMOTE_AUTOSTART}" == "1" ]; then
+        echo "Autostart is enabled"
+        echo "xdebug.remote_autostart=On" >> ${PHP_XDEBUG_CONFIG_FILE}
+    else
+        echo "Autostart is disabled"
+        echo "xdebug.remote_autostart=Off" >> ${PHP_XDEBUG_CONFIG_FILE}
+    fi
+
+    if [ -n "${REMOTE_HOST}" ]; then
+        echo "Remote host is ${REMOTE_HOST}"
+        echo "xdebug.remote_host=${REMOTE_HOST}" >> ${PHP_XDEBUG_CONFIG_FILE}
+        echo "xdebug.remote_connect_back=1" >> ${PHP_XDEBUG_CONFIG_FILE}
+    fi
+
+    if [ -n "${REMOTE_PORT}" ]; then
+        echo "Remote port is ${REMOTE_PORT}"
+        echo "xdebug.remote_port=${REMOTE_HOST}" >> ${PHP_XDEBUG_CONFIG_FILE}
+    fi
+else
+    echo "xdebug is disabled"
+    rm ${PHP_XDEBUG_CONFIG_FILE}
+fi
+
+# Restart fpm via supervisor
+if [ "${RESTART_FPM}" == "1" ]; then
+    /usr/bin/supervisorctl restart php7-fpm
+fi

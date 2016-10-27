@@ -4,6 +4,9 @@ MAINTAINER Johann Zelger <j.zelger@techdivision.com>
 # copy all configurations
 COPY etc /etc
 
+# copy usr dir
+COPY usr /usr
+
 # copy helpers
 COPY helpers /helpers
 
