@@ -4,6 +4,9 @@ MAINTAINER Johann Zelger <j.zelger@techdivision.com>
 # copy all configurations
 COPY etc /etc
 
+# copy usr dir
+COPY usr /usr
+
 # copy helpers
 COPY helpers /helpers
 
@@ -45,5 +48,7 @@ RUN echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositor
 
     # Create root user without password
     /helpers/init_mysql.sh
+
+ENTRYPOINT ["docker-entrypoint.sh"]
 
 CMD ["/usr/bin/supervisord", "--nodaemon"]
