@@ -4,8 +4,6 @@
 # Simple helper script to enable or disable xdebug and also set some additional parameters.
 ##
 
-set -x
-
 # init variables
 ENABLE_XDEBUG="${XDEBUG_ENABLE}"
 REMOTE_AUTOSTART="${XDEBUG_REMOTE_AUTOSTART}"
@@ -67,7 +65,7 @@ case $i in
     *)
         echo "Unknown parameter \"${i}\". For more information run:"
         echo "${0} --help"
-        exit;
+        exit 1;
     ;;
 esac
 done
@@ -131,3 +129,5 @@ fi
 if [[ "${RESTART_FPM}" == "true" || NO_PROMPT == "true" ]]; then
     /usr/bin/supervisorctl restart php7-fpm
 fi
+
+exit 0
