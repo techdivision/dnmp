@@ -113,7 +113,8 @@ if [ "${ENABLE_XDEBUG}" == "true" ]; then
     if [ -n "${REMOTE_HOST}" ]; then
         echo "Remote host is ${REMOTE_HOST}"
         echo "xdebug.remote_host=${REMOTE_HOST}" >> ${PHP_XDEBUG_CONFIG_FILE}
-        echo "xdebug.remote_connect_back=1" >> ${PHP_XDEBUG_CONFIG_FILE}
+        echo "xdebug.remote_enable=On" >> ${PHP_XDEBUG_CONFIG_FILE}
+        echo "xdebug.remote_connect_back=Off" >> ${PHP_XDEBUG_CONFIG_FILE}
     fi
 
     if [ -n "${REMOTE_PORT}" ]; then
