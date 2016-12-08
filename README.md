@@ -1,7 +1,7 @@
 # dnmp
 All in one webstack docker image.
 
-## Service
+## Services
 - java
 - elasticsearch
 - mysql
