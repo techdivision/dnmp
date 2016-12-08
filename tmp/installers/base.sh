@@ -12,7 +12,7 @@ echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories;
 
 # install general packages
 apk -U --no-cache add \
-    bash vim wget ca-certificates openssl rsync curl git supervisor graphicsmagick;
+    bash vim wget ca-certificates openssl rsync curl git supervisor graphicsmagick postfix;
 
 # copy usr local bin
 cp -r /tmp/usr /;

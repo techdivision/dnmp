@@ -8,7 +8,6 @@ COPY tmp /tmp
 # run installers
 RUN /tmp/installers/base.sh
 RUN /tmp/installers/java.sh
-RUN /tmp/installers/postfix.sh
 RUN /tmp/installers/mysql.sh
 RUN /tmp/installers/nginx.sh
 RUN /tmp/installers/varnish.sh
