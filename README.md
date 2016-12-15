@@ -20,7 +20,6 @@ php xdebug is disabled by default. You can use the following environment variabl
 - **XDEBUG_REMOTE_HOST**
 - **XDEBUG_REMOTE_PORT** (php default: 9000)
 
-
 ### General usage with a new container
 `docker run -e XDEBUG_ENABLE=true -e XDEBUG_REMOTE_AUTOSTART=true -e XDEBUG_REMOTE_HOST=192.168.2.2 techdivision/dnmp`   
 
@@ -32,7 +31,7 @@ php xdebug is disabled by default. You can use the following environment variabl
 
 - Find out ip address of local machine: `ifconfig|grep inet|grep 10|head -1`
 - Insert container name as well as ip address: `docker exec -it <name> setup-xdebug -r -e -a -h=<ip-address> -p=9000`
-- Set up PHPStorm like the following and be sure to use the correct server name `Magento 2 Docker` (you can use whatevery server name you want, but remember it, we need it in the next step)
+- Set up PHPStorm like the following and be sure to use the correct server name `Magento 2 Docker` (you can use whatever server name you want, but remember it, we need it in the next step)
 
 ![alt text](phpstorm-xdebug-settings.png "XDebug PHPStorm Settings")
 
