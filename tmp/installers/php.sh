@@ -19,6 +19,9 @@ rm /etc/php7/conf.d/xdebug.ini;
 # install composer
 curl -sS https://getcomposer.org/installer | php7 -- --install-dir=/usr/local/bin --filename=composer;
 
+# link php
+ln -s /usr/bin/php7 /usr/bin/php;
+
 # copy configs
 cp -r /tmp/etc/php7 /etc;
 
