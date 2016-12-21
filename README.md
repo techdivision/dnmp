@@ -36,5 +36,5 @@ php xdebug is disabled by default. You can use the following environment variabl
 ![alt text](phpstorm-xdebug-settings.png "XDebug PHPStorm Settings")
 
 - `docker exec -ti <name> sh`
-- Fill in the server name here from the step above: `'env[PHP_IDE_CONFIG]="serverName=Magento 2 Docker"' >> /etc/php7/php-fpm.conf`
+- Fill in the server name here from the step above: `echo 'env[PHP_IDE_CONFIG]="serverName=Magento 2 Docker"' >> /etc/php7/php-fpm.conf`
 - Save the file and run `supervisorctl restart php7-fpm`
