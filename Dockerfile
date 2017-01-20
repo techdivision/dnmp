@@ -17,7 +17,7 @@ RUN /tmp/installers/elasticsearch.sh
 RUN /tmp/installers/nodejs.sh
 
 # cleanup
-RUN rm -rf /var/cache/apk/* /tmp/*
+RUN rm -rf /var/cache/apk/*
 
 # define entrypoint
 ENTRYPOINT ["docker-entrypoint.sh"]
