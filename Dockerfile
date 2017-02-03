@@ -18,7 +18,7 @@ RUN echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositor
         erlang-os-mon erlang-xmerl erlang-eldap erlang-syntax-tools && \
 
     # init mysql
-    mysql_install_db --user=mysql && \
+    mysql_install_db --user=mysql 2> /dev/null && \
     # prepare filesystem and permissions
     mkdir -p /run/mysqld/ && \
     chown mysql /run/mysqld/ && \
