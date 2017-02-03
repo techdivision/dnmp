@@ -2,12 +2,13 @@
 All in one webstack docker image.
 
 ## Services
-- java
-- elasticsearch
-- mysql
+- java v8
+- elasticsearch v2.4.2
+- mysql 
 - nginx
 - nodejs
-- php
+- php v7.0
 - postfix
 - redis
+- rabbitmq v3.6.1
 - varnish (port: 81)
