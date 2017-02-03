@@ -22,6 +22,9 @@ curl -Ls https://download.elasticsearch.org/elasticsearch/elasticsearch/elastics
 # create symlink without version number
 ln -s /usr/share/elasticsearch-${ES_VERSION} ${ES_HOME};
 
+# prepare needed directories
+mkdir -p /usr/share/elasticsearch/data/elasticsearch/nodes /usr/share/elasticsearch/logs /usr/share/elasticsearch/config/scripts;
+
 # install useful plugins
 plugin install analysis-phonetic;
 plugin install analysis-icu;
