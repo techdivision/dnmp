@@ -12,3 +12,6 @@ All in one webstack docker image.
 - redis
 - rabbitmq v3.6.1
 - varnish (port: 81)
+
+## PHP Xdebug 
+Xdebug is disabled by default. If you want to activate it, check [docs/Xdebug](docs/Xdebug.md).
