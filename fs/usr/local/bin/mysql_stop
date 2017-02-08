@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 PID=$(pgrep mysqld)
 
-kill -s TERM "${PID}"
+kill -s TERM "${PID}" 2> /dev/null
 
 while kill -0 "${PID}" 2> /dev/null;
 do
